@@ -1,0 +1,36 @@
+AppBundle\Entity\Playlist:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\PlaylistRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        description:
+            type: text
+    lifecycleCallbacks: {  }
+    manyToOne:
+        user:
+            targetEntity: user
+            inversedBy: Playlist
+            joinColumn:
+                name: user_id
+                referencedColumnName: id
+    manyToMany:
+        Song:
+            targetEntity: Song
+            inversedBy: Playlist
+            joinTable:
+                name: playlists_songs
+                joinColumns:
+                    playlist_id:
+                        referencedColumnName: id
+                inverseJoinColumns:
+                    song_id:
+                        referencedColumnName: id

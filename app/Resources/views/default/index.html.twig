@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    .background
+    {
+    background-color: white;
+    }
+{% endblock %}
+
+{% block body %}
+    <div style="width: 50%">
+        <div class="background">
+            <h1>
+                <p class="text-primary">
+                    Welcome in our warm company!<br>
+                </p>
+                <div align="left">
+                    <small>
+                        This site was created only as a test of the pen.<br>
+                        For this site was used Symfony framework.<br>
+                        <strong>Entities:</strong>
+                        <p align="center">User</p>
+                        oneToMany:
+                            Playlist<br>
+                        <p align="center">Playlist</p>
+                        manyToOne:
+                            User<br>
+                        manyToMany:
+                            Song<br>
+                        <p align="center">Song</p>
+                        manyToMany:
+                            Playlist<br>
+                    </small>
+                </div>
+            </h1>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,16 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Adding songs{% endblock %}
+
+{% block body %}
+    {{ form_start(form) }}
+    {{ form_label(form.link) }}
+    <br>
+    {% if error=='Not mp3' %}
+        Put mp3 file pls
+    {% endif %}
+    {{ form_errors(form.link) }}
+    {{ form_widget(form.link) }}
+    <button class="btn btn-default">Upload</button>
+    {{ form_end(form) }}
+{% endblock %}

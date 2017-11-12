@@ -1,0 +1,36 @@
+AppBundle\Entity\Song:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\SongRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        singer:
+            type: string
+            length: 255
+        album:
+            type: string
+            length: 255
+        year:
+            type: integer
+            length: 4
+        genre:
+            type: string
+            length: 255
+        link:
+            type: string
+            length: 255
+            unique: true
+    lifecycleCallbacks: {  }
+    manyToMany:
+        Playlist:
+            targetEntity: Playlist
+            mappedBy: Song

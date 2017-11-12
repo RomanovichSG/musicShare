@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet"/>
+        <title>{% block title %}Welcome!{% endblock %}</title>
+            <style type="text/css">
+                body {background: url(/images/background.jpeg);}
+                #header{
+                    background: url(/images/notes.png);
+                    left: 0;
+                    top: 0;
+                    width: 100%;
+                    height: 135px;
+                }
+                #body{
+                    left: 0;
+                    top: 20%;
+                    width: 100%;
+                    height: 40%;
+                }
+                #advesting{
+                    position: fixed;
+                    left: 0;
+                    bottom: 0;
+                    padding: 5px;
+                    background: #b5b4a6;
+                    color: #000000;
+                    width: 100%;
+                    height: 20%;
+                    text-align: center;
+                }
+                .photo {
+                    display: inline-block;
+                    position: relative;
+                }
+                .photo::after {
+                    content: attr(data-title);
+                    position: absolute;
+                    left: 0; right: 0; bottom: -25px;
+                    z-index: 1;
+                    background: rgb(0, 0, 0);
+                    color: #fff;
+                    text-align: center;
+                    font-family: Arial, sans-serif;
+                    font-size: 17px;
+                    padding: 5px 10px;
+                    border: 1px solid #333;
+                }
+                {% block stylesheets %}
+                {% endblock %}
+            </style>
+    </head>
+    <body>
+        <div id="header" align="center">
+            {% block header %}
+                <table>
+                    <tr>
+                        <td>
+                            <div data-title="Home" class="photo">
+                                <p><a href="{{ path("home") }}"><img src="/images/home.png" width="100" height="100" border="0" alt="Home" ></a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-title="Music" class="photo">
+                                <p><a href="{{ path("music") }}"><img src="/images/music.png" width="100" height="100" border="0" alt="Music"></a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-title="Room" class="photo">
+                                <p><a href="{{ path("room") }}"><img src="/images/room.png" width="100" height="100" border="0" alt="Room" class=""></a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-title="Login" class="photo">
+                                <p><a href="{{ path("login") }}"><img src="/images/login.png" width="100" height="100" border="0" alt="Login" class=""></a></p>
+                            </div>
+                        </td>
+                        <td>
+                            <div data-title="Logout" class="photo">
+                                <p><a href="{{ path("logout") }}"><img src="/images/logout.png" width="100" height="100" border="0" alt="Logout" class=""></a></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+            {% endblock %}
+        </div>
+        <div id="body" align="center">
+            <div class="container">
+                {% block body %}{% endblock %}
+            </div>
+        </div>
+        <div id="footer">
+            {% block footer %}{% endblock %}
+        </div>
+        {#<div id="advesting">
+            Here could be your advertisement
+        </div>#}
+    </body>
+</html>

@@ -1,0 +1,33 @@
+AppBundle\Entity\user:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\userRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+            unique: true
+        password:
+            type: string
+            length: 255
+        email:
+            type: string
+            length: 255
+            unique: true
+        dateLastLogin:
+            type: datetime
+            column: date_last_login
+        role:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
+    oneToMany:
+        Playlist:
+            targetEntity: Playlist
+            mappedBy: user

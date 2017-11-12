@@ -1,0 +1,61 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Room{% endblock %}
+
+{% block stylesheets %}
+    .songs
+    {
+    width: 30%;
+    background-color: white;
+    }
+    .info
+    {
+    width: 300px;
+    background-color: white;
+    }
+{% endblock %}
+
+{% block body %}
+    <div class="info">
+        <h2>User's info</h2>
+        <table class="table">
+            <tr>
+                <td>Name</td>
+                <td>{{ userInfo.Name }}</td>
+            </tr>
+            <tr>
+                <td>Email</td>
+                <td>{{ userInfo.Email }}</td>
+            </tr>
+            <tr>
+                <td>Created</td>
+                <td>{{ userInfo.Created }}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="songs">
+        <h2>Select playlists</h2>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Playlist</th>
+                <th>Description</th>
+                <th>View songs</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for playlist in playlists %}
+                <tr>
+                    <th>{{ loop.index }}</th>
+                    <td>{{ playlist.name }}</td>
+                    <td>{{ playlist.description }}</td>
+                    <td align="center">
+                        <input type="button" value="View songs" onclick='location.href="{{ path("songsInPlaylist",{'id':playlist.id}) }}"'>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

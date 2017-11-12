@@ -1,0 +1,45 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}View songs{% endblock %}
+
+{% block stylesheets %}
+    .songs
+    {
+    width: 70%;
+    background-color: white;
+    }
+{% endblock %}
+
+{% block body %}
+    <div class="songs">
+        <h2>Songs in "{{ name }}"</h2>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Singer</th>
+                <th>Album</th>
+                <th>Year</th>
+                <th>Genre</th>
+                <th>Remove</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                    <tr>
+                        <th scope="row" >{{ loop.index }}</th>
+                        <td>{{ song.name }}</td>
+                        <td>{{ song.singer }}</td>
+                        <td>{{ song.album }}</td>
+                        <td>{{ song.year }}</td>
+                        <td>{{ song.genre }}</td>
+                        <td>
+                            <input type="button" value="Remove song" onclick='location.href="{{ path("removeFromPlaylist",{'playlistId':playlistId,'id':song.id}) }}"'>
+                        </td>
+                    </tr>
+                {% endfor  %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Music list{% endblock %}
+
+{% block stylesheets %}
+    .songs
+    {
+        width: 750px;
+        background-color: white;
+    }
+{% endblock %}
+
+{% block body %}
+    <form action="{{ path("music") }}" method="post">
+    <div class="songs">
+        <table class="table table-condensed">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Singer</th>
+                    <th>Album</th>
+                    <th>Year</th>
+                    <th>Genres</th>
+                    {% if is_granted('ROLE_USER') %}
+                        <th>Add to playlist</th>
+                    {% endif %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for song in songs %}
+                    <tr>
+                        <th scope="row" >{{ loop.index }}</th>
+                        <input type="hidden" name="songList[{{ song.id }}][id]" value="{{ song.id }}">
+                        <td>{{ song.name }}</td>
+                        <input type="hidden" name="songList[{{ song.id }}][name]" value="{{ song.name }}">
+                        <td>{{ song.singer }}</td>
+                        <input type="hidden" name="songList[{{ song.id }}][singer]" value="{{ song.singer }}">
+                        <td>{{ song.album }}</td>
+                        <input type="hidden" name="songList[{{ song.id }}][album]" value="{{ song.album }}">
+                        <td>{{ song.year }}</td>
+                        <input type="hidden" name="songList[{{ song.id }}][year]" value="{{ song.year }}">
+                        <td>{{ song.genre }}</td>
+                        <input type="hidden" name="songList[{{ song.id }}][genre]" value="{{ song.genre }}">
+                        {% if is_granted('ROLE_USER') %}
+                            <td align="center">
+                                <input type="checkbox" name="addToPlaylist[]" value="{{ song.id }}">
+                            </td>
+                        {% endif %}
+                    </tr>
+                {% endfor  %}
+            </tbody>
+        </table>
+    </div>
+    <br>
+        <input type="hidden" name="song_id" value="{{ id }}">
+    {% if not songs %}
+        <input type="hidden" name="songs_ended" value="true">
+    {% endif %}
+        <select name="orderBy" class="selectpicker">
+            <option disabled selected> Sort by </option>
+            <option value="name" > Name </option>
+            <option value="singer" > Singer </option>
+            <option value="album" > Album </option>
+            <option value="year" > Year </option>
+            <option value="genre" > Genre </option>
+        </select>
+        <input type='submit' class="btn btn-default" value='Sort'>
+        <br>
+        <input type='button' class="btn btn-default" value='Add your songs' onClick='location.href="{{ path("add") }}"'>
+        {% if is_granted('ROLE_USER') %}
+            <input type='submit' class="btn btn-default" value='Add songs to playlist' formaction="{{ path("addingToPLaylist") }}" formmethod="post">
+        {% endif %}
+        <br>
+        <input type='submit' class="btn btn-default" name="previous" value='Previous'>
+        <input type='submit' class="btn btn-default" name="next" value='Next'>
+    </form>
+{% endblock %}

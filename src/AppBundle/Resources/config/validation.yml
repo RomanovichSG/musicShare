@@ -1,0 +1,17 @@
+AppBundle\Entity\user:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: name
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: email
+    properties:
+        name:
+            - NotBlank: ~
+        password:
+            - NotBlank: ~
+        email:
+            - NotBlank: ~
+            - Email: ~
+
+AppBundle\Entity\Playlist:
+    properties:
+        name:
+            - NotBlank: ~

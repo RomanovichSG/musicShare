@@ -1,0 +1,35 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Create playlist{% endblock %}
+
+{% block stylesheets %}
+    .songs
+    {
+    width: 500px;
+    background-color: white;
+    }
+    .size
+    {
+    width: 30%;
+    }
+{% endblock %}
+
+{% block body %}
+    <form>
+        <h2>Create new playlist</h2>
+        <div class="size">
+            <div class="form-group">
+                {{ form_start(form) }}
+                <strong>Name</strong>
+                {{ form_errors(form.name) }}
+                {{ form_widget(form.name,{ 'attr': {'class' : 'form-control', 'placeholder':'Add Name'} }) }}
+                <br>
+                <strong>Description</strong>
+                {{ form_errors(form.description) }}
+                {{ form_widget(form.description,{ 'attr': {'class' : 'form-control', 'placeholder':'Add description'} }) }}
+                <button type="submit" class="btn btn-default" formaction="{{ path("createPlaylist") }}" formmethod="post">Create playlist</button>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </form>
+{% endblock %}

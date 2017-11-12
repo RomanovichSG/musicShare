@@ -1,0 +1,31 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block body %}
+    <div class="input-group">
+        {{ form_start(form) }}
+        <div class="input-group">
+            {{ form_errors(form.name) }}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            {{ form_widget(form.name,{ 'attr': {'class' : 'form-control', 'placeholder':'Name'} }) }}<br>
+        </div>
+        <div class="input-group">
+            {{ form_errors(form.email) }}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+            {{ form_widget(form.email,{ 'attr': {'class' : 'form-control', 'placeholder':'Email'} }) }}<br>
+        </div>
+        <div class="input-group">
+            {{ form_errors(form.password.first) }}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            {{ form_widget(form.password.first,{ 'attr': {'class' : 'form-control', 'placeholder':'Password'} }) }}<br>
+        </div>
+        <div class="input-group">
+            {{ form_errors(form.password.second) }}
+            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+            {{ form_widget(form.password.second,{ 'attr': {'class' : 'form-control', 'placeholder':'Repeat password'} }) }}<br>
+        </div>
+    </div>
+            <button type="submit" class="btn btn-default">Register</button>
+        {{ form_end(form) }}
+{% endblock %}

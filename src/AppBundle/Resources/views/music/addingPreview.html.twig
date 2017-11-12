@@ -1,0 +1,27 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}Correcting{% endblock %}
+
+{% block stylesheets %}
+{% endblock %}
+
+{% block body %}
+    <form action="{{ path("addDB") }}" method="post">
+    {% for song in songs %}
+        <p class="h1">Song</p>
+        <div class="input-group">
+            <p class="h3">Name</p>
+                <input type="text" name="song[{{ loop.index0 }}][name]" class="form-control" value="{{ song.name }}"><br>
+            <p class="h3">Singer</p>
+                <input type="text" name="song[{{ loop.index0 }}][singer]" class="form-control" value="{{ song.singer }}"><br>
+            <p class="h3">Album</p>
+                <input type="text" name="song[{{ loop.index0 }}][album]" class="form-control" value="{{ song.album }}"><br>
+            <p class="h3">Year</p>
+                <input type="text" name="song[{{ loop.index0 }}][year]" class="form-control" value="{{ song.year }}"><br>
+            <p class="h3">Genre</p>
+                <input type="text" name="song[{{ loop.index0 }}][genre]" class="form-control" value="{{ song.genre }}"><br>
+            <input type="hidden" name="song[{{ loop.index0 }}][link]" class="form-control" value="{{ song.link }}">
+        </div>
+    {% endfor %}<br>
+    <button type="submit" class="btn btn-default">Upload</button>
+{% endblock %}

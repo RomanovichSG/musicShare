@@ -1,0 +1,63 @@
+home:
+    path:     /
+
+registration:
+    path:     /registration
+    defaults: { _controller: AppBundle:user:registration }
+
+login:
+    path:     /login
+    defaults: { _controller: AppBundle:user:login }
+
+logout:
+    path:     /logout
+    defaults: { _controller: AppBundle:user:logout }
+
+user_login:
+    path:     /login
+    defaults: { _controller: AppBundle:user:login }
+
+music:
+    path:     /list
+    defaults: { _controller: AppBundle:music:list }
+
+add:
+    path:     /add
+    defaults: { _controller: AppBundle:music:add }
+
+addDB:
+    path:     /addDB
+    defaults: { _controller: AppBundle:music:addToDataBase }
+
+adding:
+    path:     /preview
+    defaults: { _controller: AppBundle:music:addingPreview }
+
+remove:
+    path:     /remove
+    defaults: { _controller: AppBundle:music:remove }
+
+room:
+    path:     /platform
+    defaults: { _controller: AppBundle:room:platform }
+
+createPlaylist:
+    path:     /platform/createPlaylist
+    defaults: { _controller: AppBundle:room:createPlaylist }
+
+addSongsToPlaylist:
+    path:     /platform/addSongsToPlaylist
+    defaults: { _controller: AppBundle:room:addSongsToPlaylist }
+
+addingToPLaylist:
+    path:     /platform/adding
+    defaults: { _controller: AppBundle:room:adding }
+
+songsInPlaylist:
+    path:     /platform/view/{id}
+    defaults: { _controller: AppBundle:room:view }
+
+removeFromPlaylist:
+    path:     /platform/remove/{playlistId}/{id}
+    defaults: { _controller: AppBundle:room:removeFromPlaylist }
+
