@@ -26,16 +26,22 @@ class roomController extends Controller
         ));
     }
 
-    public function addingAction()
+    public function addingAction(Request $request)
     {
-        $user=$this->getUser();
-        $addedSongs=$this->getDoctrine()
-            ->getRepository(Playlist::class)
-            ->getAddedSongsInfo($_POST,'songList','addToPlaylist');
-        $playlists=$user->getPlaylist();
-        return $this->render('AppBundle:room:adding.html.twig', array(
-            'songs'=>$addedSongs, 'playlists'=>$playlists
-        ));
+        if(!isset($_POST['addToPlaylist']))
+        {
+            return $this->redirectToRoute('music',array('request'=>$request));
+        }
+        else
+            {
+                $addedSongs=$this->getDoctrine()
+                    ->getRepository(Playlist::class)
+                    ->getAddedSongsInfo($_POST,'songList','addToPlaylist');
+                $playlists=$user->getPlaylist();
+                return $this->render('AppBundle:room:adding.html.twig', array(
+                    'songs'=>$addedSongs, 'playlists'=>$playlists
+                ));
+            }
     }
 
     public function createPlaylistAction(Request $request)
