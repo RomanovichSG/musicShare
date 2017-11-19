@@ -13,13 +13,14 @@ use AppBundle\Helper\AudioInfo;
 
 class musicController extends Controller
 {
-    public function listAction()
+    public function listAction(Request $request)
     {
+        $post=$request->request->all();
         $rm=$this->getDoctrine()
             ->getRepository(Song::class);
 
-        $id=$rm->getId($_POST);
-        $orderBy=$rm->sortMusic($_POST);
+        $id=$rm->getId($post);
+        $orderBy=$rm->sortMusic($post);
 
         $em=$this->getDoctrine()->getManager();
         $songs=$em->getRepository(Song::class)->createQueryBuilder('song')
@@ -95,9 +96,10 @@ class musicController extends Controller
             "songs"=>$songs
         ));
     }
-    public function addToDataBaseAction()
+    public function addToDataBaseAction(Request $request)
     {
-        $songs=$_POST["song"];
+        $post=$request->request->all();
+        $songs=$post["song"];
         foreach ($songs as $song)
         {
             $track=new Song();

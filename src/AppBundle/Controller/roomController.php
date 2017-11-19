@@ -6,6 +6,7 @@ use AppBundle\Entity\Playlist;
 use AppBundle\Entity\user;
 use AppBundle\Entity\Song;
 use AppBundle\Form\PlaylistType;
+use Doctrine\ORM\Mapping\PostLoad;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use AppBundle\Repository\PlaylistRepository;
 use Symfony\Component\HttpFoundation\Request;
@@ -28,15 +29,17 @@ class roomController extends Controller
 
     public function addingAction(Request $request)
     {
-        if(!isset($_POST['addToPlaylist']))
+        $post=$request->request->all();
+        if(!isset($post['addToPlaylist']))
         {
             return $this->redirectToRoute('music',array('request'=>$request));
         }
         else
             {
+                $user = $this->getUser();
                 $addedSongs=$this->getDoctrine()
                     ->getRepository(Playlist::class)
-                    ->getAddedSongsInfo($_POST,'songList','addToPlaylist');
+                    ->getAddedSongsInfo($post,'songList','addToPlaylist');
                 $playlists=$user->getPlaylist();
                 return $this->render('AppBundle:room:adding.html.twig', array(
                     'songs'=>$addedSongs, 'playlists'=>$playlists
@@ -46,6 +49,7 @@ class roomController extends Controller
 
     public function createPlaylistAction(Request $request)
     {
+        $post=$request->request->all();
         $user=$this->getUser();
 
         $playlist=new Playlist();
@@ -56,7 +60,7 @@ class roomController extends Controller
         {
             $playlist=$form->getData();
             $playlist->setUser($user);
-            $addToDataBase=$this->addSong($_POST,'addToPlaylist',$playlist,$user);
+            $addToDataBase=$this->addSong($post,'addToPlaylist',$playlist,$user);
             return $this->redirectToRoute('room');
         }
 
@@ -65,15 +69,16 @@ class roomController extends Controller
         ));
     }
 
-    public function addSongsToPlaylistAction()
+    public function addSongsToPlaylistAction(Request $request)
     {
-        foreach($_POST['addedPlaylists'] as $playlistId)
+        $post=$request->request->all();
+        foreach($post['addedPlaylists'] as $playlistId)
         {
             $playlist=$this->getDoctrine()
                 ->getRepository(Playlist::class)
                 ->find($playlistId);
             $user=$playlist->getUser();
-            $addToDataBase=$this->addSong($_POST,'addToPlaylist',$playlist,$user);
+            $addToDataBase=$this->addSong($post,'addToPlaylist',$playlist,$user);
         }
         return $this->redirectToRoute('room');
     }
